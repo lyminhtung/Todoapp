@@ -1,0 +1,30 @@
+
+<div class="navbar">
+    <h2>Email Manager</h2>
+    <a href="/inbox" class="<%= activePage === 'inbox' ? 'active' : '' %>">Inbox</a>
+    <a href="/compose" class="<%= activePage === 'compose' ? 'active' : '' %>">Compose</a>
+    <a href="/outbox" class="<%= activePage === 'outbox' ? 'active' : '' %>">Outbox</a>
+    <p>Welcome, <%= userName %> | <a href="/signout">Sign out</a></p>
+</div>
+<style>
+    .navbar {
+        width: 200px;
+        position: fixed;
+        height: 100%;
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-right: 1px solid #ddd;
+    }
+    .navbar a {
+        display: block;
+        padding: 10px;
+        color: #007BFF;
+        text-decoration: none;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+    .navbar a:hover, .navbar a.active {
+        background-color: #e9ecef;
+        font-weight: bold;
+    }
+</style>
