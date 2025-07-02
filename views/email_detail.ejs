@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Details</title>
+    <link rel="stylesheet" href="/email_detail.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Email Details</h1>
+        <p><strong>From:</strong> <%= email.sender_name %></p>
+        <p><strong>To:</strong> <%= email.receiver_name %></p>
+        <p><strong>Subject:</strong> <%= email.subject %></p>
+        <p class="message-content"><strong>Message:</strong> <%= email.body %></p>
+
+        <% if (email.attachment) { %>
+            <p><strong>Attachment:</strong> 
+                <a href="/uploads/<%= email.attachment %>" class="attachment-link"><%= email.attachment %></a>
+                <!-- Thêm nút tải tài liệu -->
+                <a href="/uploads/<%= email.attachment %>" class="download-button" download>Download</a>
+            </p>
+        <% } else { %>
+            <p>No attachment available.</p>
+        <% } %>
+
+        <p><strong>Sent:</strong> <%= email.timestamp %></p>
+        <a href="/outbox" class="back-button">Back to Outbox</a>
+    </div>
+</body>
+</html>
