@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outbox</title>
+    <link rel="stylesheet" href="/outbox.css">
+</head>
+<body>
+    <%- include('navbar', { activePage: 'outbox', userName: userName }) %>
+    <div class="content">
+        <h1>Outbox</h1>
+        <ul>
+            <% if (emails && emails.length > 0) { %>
+                <% emails.forEach(email => { %>
+                    <li>
+                        <strong>From:</strong> <%= email.sender_name %> 
+                        <strong>To:</strong> <%= email.receiver_name %><br>
+                        <a href="/email/<%= email.id %>" class="email-link"><%= email.subject || "(no subject)" %></a>
+                        <span> - <%= email.timestamp %></span>
+                        <a href="/email/<%= email.id %>" class="view-button">View</a>
+                        <form action="/delete-email/<%= email.id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <li>No emails found in your outbox.</li>
+            <% } %>
+        </ul>
+        <button type="button" onclick="window.location.href='/compose'">Compose Email</button>
+        <div class="pagination">
+            <% if (currentPage > 1) { %>
+                <a href="?page=<%= currentPage - 1 %>">«</a>
+            <% } %>
+
+            <% for (let i = 1; i <= totalPages; i++) { %>
+                <a href="?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+            <% } %>
+            <% if (currentPage < totalPages) { %>
+                <a href="?page=<%= currentPage + 1 %>">»</a>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
