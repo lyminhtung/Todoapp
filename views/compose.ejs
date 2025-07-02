@@ -1,0 +1,38 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Compose Email</title>
+        <link rel="stylesheet" href="/compose.css">
+    </head>
+    <body style="display: block;">
+        <%- include('navbar', { activePage: 'compose', userName: userName }) %>
+        <div class="content">
+            <h1>Compose Email</h1>
+            <form action="/compose" method="POST" enctype="multipart/form-data">
+                <div  class="form-group">
+                    <label for="recipient">Recipient</label>
+                    <select name="recipient" id="recipient" required>
+                        <option value="" disabled selected>Select a recipient</option>
+                        <% users.forEach(user => { %>
+                            <option value="<%= user.email %>"><%= user.full_name %> (<%= user.email %>)</option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" name="subject" id="subject" placeholder="Enter subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" rows="8" placeholder="Enter your message here"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="attachment">Attachment</label>
+                    <input type="file" name="attachment" id="attachment" accept=".jpg, .jpeg, .png, .pdf, .docx, .txt">
+                </div>
+                <button type="submit" class="btn-send">Send Email</button>
+            </form>
+        </div>
+    </body>
+    </html>
